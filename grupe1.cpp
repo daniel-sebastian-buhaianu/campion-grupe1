@@ -1,5 +1,5 @@
 #include <fstream>
-#include <iostream>
+#include <cstdlib>
 #define NMAX 200
 using namespace std;
 int e[NMAX+1];
@@ -9,7 +9,7 @@ int main()
 	ofstream g("grupe1.out");
 	int n, k, i;
 	f >> n >> k;
-	int uz[n+1];
+	int uz[n+1]; uz[0] = 0;
 	for (i = 1; i <= n; i++)
 	{
 		char c;
@@ -20,6 +20,7 @@ int main()
 	int nrmax, nrmin, fmax, fmin, bmax, bmin;
 	nrmax = fmax = bmax = 0;
 	nrmin = fmin = bmin = NMAX;
+	bool ok = 1;
 	for (i = 1; i <= k; i++)
 	{
 		int nr;
@@ -37,13 +38,13 @@ int main()
 			nr--;
 		}
 		g << nrb << ' ' << nrf << '\n';
+		if (abs(nrb-nrf) > 1) ok = 0;
 		if (nrf > fmax) fmax = nrf;
 		if (nrf < fmin) fmin = nrf;
 		if (nrb > bmax) bmax = nrb;
 		if (nrb < bmin) bmin = nrb;
 	}
 	f.close();
-	bool ok = 1;
 	if (nrmax-nrmin > 1) ok = 0;
 	if (fmax-fmin > 1) ok = 0;
 	if (bmax-bmin > 1) ok = 0;
@@ -59,4 +60,3 @@ int main()
 	g.close();
 	return 0;
 }
-
