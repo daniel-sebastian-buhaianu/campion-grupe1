@@ -9,11 +9,13 @@ int main()
 	ofstream g("grupe1.out");
 	int n, k, i;
 	f >> n >> k;
+	int uz[n+1];
 	for (i = 1; i <= n; i++)
 	{
 		char c;
 		f >> c;
 		if (c == 'f') e[i] = 1;
+		uz[i] = 1;
 	}
 	int nrmax, nrmin, fmax, fmin, bmax, bmin;
 	nrmax = fmax = bmax = 0;
@@ -29,6 +31,7 @@ int main()
 		{
 			int j;
 			f >> j;
+			uz[j] = 0;
 			if (e[j] == 1) nrf++;
 			else nrb++;
 			nr--;
@@ -44,6 +47,13 @@ int main()
 	if (nrmax-nrmin > 1) ok = 0;
 	if (fmax-fmin > 1) ok = 0;
 	if (bmax-bmin > 1) ok = 0;
+	if (ok)
+		for (i = 1; i <= n; i++)
+			if (uz[i])
+			{
+				ok = 0;
+				break;
+			}
 	if (ok) g << "DA";
 	else g << "NU";
 	g.close();
